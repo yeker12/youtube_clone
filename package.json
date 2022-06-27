@@ -1,0 +1,27 @@
+{
+  "name": "youtube_project",
+  "version": "1.0.0",
+  "description": "This is youtube clone project using NodeJS, express, MongoDB, ES6",
+  "scripts": {
+    "dev": "nodemon --exec babel-node src/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yeker12/youtube_clone.git"
+  },
+  "author": "Yeker",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yeker12/youtube_clone/issues"
+  },
+  "homepage": "https://github.com/yeker12/youtube_clone#readme",
+  "dependencies": {
+    "express": "^4.18.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.18.5",
+    "@babel/node": "^7.18.5",
+    "@babel/preset-env": "^7.18.2",
+    "nodemon": "^2.0.18"
+  }
+}
