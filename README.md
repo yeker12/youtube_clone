@@ -8,7 +8,7 @@
 
 유저 라우터
 /users/edit -> Edit Profile
-/users/delete -> Delete Profile
+/users/remove -> Remove Profile
 
 비디오 라우터
 /videos/watch -> Watch Video
