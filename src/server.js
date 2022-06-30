@@ -1,5 +1,8 @@
 import express from "express";
 import morgan from "morgan";
+import globalRouter from "./routers/globalRouter";
+import userRouter from "./routers/userRouter";
+import videoRouter from "./routers/videoRouter";
 
 // PORT 정의
 const PORT = 4000;
@@ -7,27 +10,13 @@ const PORT = 4000;
 const app = express();
 // morgan 정의하기
 const logger = morgan("dev");
-
-
-// 서버(app) GET request용 callback 함수 정의
-const handleHome = (req, res) => {
-   // 빈 화면으로 끝내기
-   // return res.end
-   // 화면에 글씨 보내기
-   return res.send("<h1>I still love you!</h1>"); 
-}
-
-// object도 전송 가능
-const handleLogin = (req, res) => {
-   return res.send({"text": "Login Success!"});
-}
-
-
 // app.use는 global middleware
 app.use(logger);
-// 서버 GET request 하기: route와 callback 함수 입력
-app.get("/", handleHome);
-app.get("/login", handleLogin);
+
+// 라우터 사용
+app.use("/", globalRouter);
+app.use("/users", userRouter);
+app.use("/videos", videoRouter);
 
 
 // 서버(app) listening용 callback 함수 정의
