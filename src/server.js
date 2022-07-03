@@ -8,10 +8,14 @@ import videoRouter from "./routers/videoRouter";
 const PORT = 4000;
 // 서버(app) 만들기: express 함수 호출로 가능
 const app = express();
+// pug 설정
+app.set("views", process.cwd() + "/src/views");
+app.set("view engine", "pug");
 // morgan 정의하기
 const logger = morgan("dev");
 // app.use는 global middleware
 app.use(logger);
+
 
 // 라우터 사용
 app.use("/", globalRouter);
