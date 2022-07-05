@@ -3,8 +3,33 @@ const fakeUser = {
     loggedIn: true,
 }
 
-
-export const homeVideo = (req, res) => res.render("home", {pageTitle: 'Home', fakeUser:fakeUser});
+export const homeVideo = (req, res) => {
+    const videos = [{
+        title: "FIrst video",
+        rating: 5,
+        comments: 3,
+        createdAt: "2 mins ago",
+        views:59,
+        id: 1, 
+    },
+    {
+        title: "Second video",
+        rating: 4.5,
+        comments: 5,
+        createdAt: "3 mins ago",
+        views:43,
+        id: 2,
+    },
+    {
+        title: "Third video",
+        rating: 3,
+        comments: 2,
+        createdAt: "4 mins ago",
+        views:88,
+        id: 3,
+    }];
+    res.render("home", {pageTitle: 'Home', fakeUser:fakeUser, videos});
+}
 export const watchVideos = (req, res) => res.render("watch", {pageTitle: "Watch"});
 export const editVideos = (req, res) => res.render("edit", {pageTitle: 'Edit'});
 export const removeVideos = (req, res) => {
