@@ -1,4 +1,10 @@
-export const homeVideo = (req, res) => res.render("home", {pageTitle: 'Home'});
+const fakeUser = {
+    userName: "Yejin",
+    loggedIn: true,
+}
+
+
+export const homeVideo = (req, res) => res.render("home", {pageTitle: 'Home', fakeUser:fakeUser});
 export const watchVideos = (req, res) => res.render("watch", {pageTitle: "Watch"});
 export const editVideos = (req, res) => res.render("edit", {pageTitle: 'Edit'});
 export const removeVideos = (req, res) => {
