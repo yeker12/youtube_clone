@@ -38,5 +38,7 @@ export const getEdit = (req, res) => {
 }
 export const postEdit = (req, res) => {
     const id = req.params.id;
+    const new_title = req.body.title;
+    videos[id-1].title = new_title;
     return res.redirect(`/videos/${id}`);
 }

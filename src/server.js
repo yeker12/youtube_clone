@@ -15,8 +15,8 @@ app.set("view engine", "pug");
 const logger = morgan("dev");
 // app.use는 global middleware
 app.use(logger);
-
-
+// express가 form의 value 값을 읽을 수 있도록 설정
+app.use(express.urlencoded({extended: true}));
 // 라우터 사용
 app.use("/", globalRouter);
 app.use("/users", userRouter);
