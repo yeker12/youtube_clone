@@ -31,6 +31,8 @@ export const watchVideos = (req, res) => {
     const video = videos[id-1]; // videos 리스트에서 (id-1) 번째 객체
     return res.render("watch", {pageTitle: `Watching ${video.title}`, video:video});
 }
+
+// 비디오 수정하기
 export const getEdit = (req, res) => {
     const id = req.params.id; //url에서 가져온 id
     const video = videos[id-1]; // videos 리스트에서 (id-1) 번째 객체  
@@ -41,4 +43,22 @@ export const postEdit = (req, res) => {
     const new_title = req.body.title;
     videos[id-1].title = new_title;
     return res.redirect(`/videos/${id}`);
+}
+// 비디오 업로드하기
+export const getUpload = (req, res) => {
+    return res.render("upload", {pageTitle: "Upload Video"});
+}
+
+export const postUpload = (req, res) => {
+    const title = req.body.title;
+    const newVideo = {
+        title: title,
+        rating: 0,
+        comments: 0,
+        createdAt: "Just Now",
+        views:0,
+        id: videos.length + 1,
+    }
+    videos.push(newVideo);
+    return res.redirect("/");
 }

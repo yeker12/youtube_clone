@@ -6,7 +6,10 @@ html(lang="ko")
     body 
         h1
             header
-                h1=pageTitle  
+                h1=pageTitle
+                ul
+                    li 
+                        a(href="/videos/upload") Upload vidoe
             main 
                 block content
         include partials/footer.pug
