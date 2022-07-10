@@ -1,15 +1,9 @@
-import { trusted } from "mongoose";
 import VideoModel from "../models/Video";
 
 // 비디오 홈화면
 export const homeVideo = async(req, res) => {
-    try{
-        const video = await VideoModel.find({});
-        return res.render("home", {pageTitle: 'Home', videos: []});
-    } catch(error) {
-        return res.render("Server-Error: ", {error});
-    }
-    
+    const videos = await VideoModel.find({});
+    return res.render("home", { pageTitle: 'Home', videos});
 }
 // 비디오 보기 화면
 export const watchVideos = (req, res) => {
@@ -31,7 +25,18 @@ export const getUpload = (req, res) => {
     return res.render("upload", {pageTitle: "Upload Video"});
 }
 // 비디오 업로드하기 (POST)
-export const postUpload = (req, res) => {
-    const title = req.body.title;
-       return res.redirect("/");
+export const postUpload = async (req, res) => {
+    const { title, description, hashtags } = req.body;
+    const video = new VideoModel({
+        title: title,
+        description: description,
+        createdAt: Date.now(),
+        hashtags: hashtags.split(",").map( (word) => `#${word}`),
+        meta: {
+            views: 0,
+            rating: 0,
+        }
+    })
+    await video.save();
+    return res.redirect("/");
 }
