@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "This is youtube clone project using NodeJS, express, MongoDB, ES6",
   "scripts": {
-    "dev": "nodemon --exec babel-node src/server.js"
+    "dev": "nodemon --exec babel-node src/init.js"
   },
   "repository": {
     "type": "git",
