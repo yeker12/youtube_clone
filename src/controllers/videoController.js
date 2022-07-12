@@ -63,3 +63,10 @@ export const postUpload = async (req, res) => {
     }
     
 }
+
+// 비디오 삭제하기 (GET)
+export const getDelete = async (req, res) => {
+    const { id } = req.params;
+    await VideoModel.findByIdAndDelete(id);
+    return res.redirect("/");
+}
