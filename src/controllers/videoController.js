@@ -37,7 +37,7 @@ export const postEdit = async (req, res) => {
     await VideoModel.findByIdAndUpdate(id, {
         title:title,
         description:description,
-        hashtags:hashtags,
+        hashtags: VideoModel.formatHashtags(hashtags),
     })
     }
     return res.redirect(`/videos/${id}`);
@@ -53,7 +53,7 @@ export const postUpload = async (req, res) => {
         const video = new VideoModel({
             title: title,
             description: description,
-            hashtags,
+            hashtags: VideoModel.formatHashtags(hashtags),
         })
         await video.save();
         return res.redirect("/");

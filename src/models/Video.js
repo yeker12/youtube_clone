@@ -12,10 +12,9 @@ const videoSchema = new mongoose.Schema({
 	}
 });
 
-// 미들웨어 만들기
-videoSchema.pre("save", async function () {
-	this.hashtags = this.hashtags[0].split(",").map( (word) => word.startsWith('#') ? word : `#${word}`);
-	console.log(this.hashtags);
+// hashtags 처리용 Static function 생성
+videoSchema.static("formatHashtags", function(hashtags) {
+	return hashtags.split(",").map((word) => (word.startsWith("#") ? word : `#${word}`));
 })
 
 // 비디오 모델 만들기
