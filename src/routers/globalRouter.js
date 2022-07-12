@@ -7,5 +7,6 @@ const globalRouter = express.Router();
 globalRouter.get("/", homeVideo);
 globalRouter.get("/join", joinUsers);
 globalRouter.get("/login", loginUser);
+globalRouter.get("/search", searchVideo);
 
 export default globalRouter;

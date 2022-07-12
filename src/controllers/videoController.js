@@ -2,7 +2,7 @@ import VideoModel from "../models/Video";
 
 // 비디오 홈화면
 export const homeVideo = async(req, res) => {
-    const videos = await VideoModel.find({});
+    const videos = await VideoModel.find({}).sort({createdAt: "desc"});
     return res.render("home", { pageTitle: 'Home', videos});
 }
 // 비디오 보기 화면
@@ -69,4 +69,16 @@ export const getDelete = async (req, res) => {
     const { id } = req.params;
     await VideoModel.findByIdAndDelete(id);
     return res.redirect("/");
+}
+
+// 비디오 찾기 (GET)
+export const searchVideo = async (req, res) => {
+    const { keyword } = req.query;
+    let videos = [];
+    if(keyword){
+        videos = await VideoModel.find({
+                title: { $regex: new RegExp(keyword, "i"), },
+        })
+    }
+    return res.render("search", {pageTitle: "Search", videos });
 }
