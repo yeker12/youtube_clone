@@ -12,6 +12,12 @@ const videoSchema = new mongoose.Schema({
 	}
 });
 
+// 미들웨어 만들기
+videoSchema.pre("save", async function () {
+	this.hashtags = this.hashtags[0].split(",").map( (word) => word.startsWith('#') ? word : `#${word}`);
+	console.log(this.hashtags);
+})
+
 // 비디오 모델 만들기
 const VideoModel = mongoose.model("Video", videoSchema); // Video는 모델 이름
 

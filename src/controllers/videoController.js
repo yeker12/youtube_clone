@@ -29,14 +29,16 @@ export const getEdit = async (req, res) => {
 export const postEdit = async (req, res) => {
     const id = req.params.id;
     const {title, description, hashtags} = req.body;
-    const video = await VideoModel.findById(id);
+    const video = await VideoModel.exists({ _id : id });
+    console.log(id);
     if(!video){
         return res.render("404", {pageTitle: "❌Video Not Found!❌"});
     } else{
-    video.title = title;
-    video.description = description;
-    video.hashtags = hashtags.split(",").map( (word) => word.startsWith('#') ? word : `#${word}`);
-    await video.save();
+    await VideoModel.findByIdAndUpdate(id, {
+        title:title,
+        description:description,
+        hashtags:hashtags,
+    })
     }
     return res.redirect(`/videos/${id}`);
 }
@@ -51,7 +53,7 @@ export const postUpload = async (req, res) => {
         const video = new VideoModel({
             title: title,
             description: description,
-            hashtags: hashtags.split(",").map( (word) => `#${word}`),
+            hashtags,
         })
         await video.save();
         return res.redirect("/");
