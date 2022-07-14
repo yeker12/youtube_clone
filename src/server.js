@@ -1,6 +1,6 @@
 import express from "express";
 import morgan from "morgan";
-import globalRouter from "./routers/globalRouter";
+import rootRouter from "./routers/rootRouter";
 import userRouter from "./routers/userRouter";
 import videoRouter from "./routers/videoRouter";
 
@@ -16,7 +16,7 @@ app.use(logger);
 // express가 form의 value 값을 읽을 수 있도록 설정
 app.use(express.urlencoded({extended: true}));
 // 라우터 사용
-app.use("/", globalRouter);
+app.use("/", rootRouter);
 app.use("/users", userRouter);
 app.use("/videos", videoRouter);
 
