@@ -10,7 +10,7 @@ export const watchVideos = async (req, res) => {
     const id = req.params.id;
     const video = await VideoModel.findById(id);
     if(!video){
-        return res.render("404", {pageTitle: "❌Video Not Found!❌"});   
+        return res.status(404).render("404", {pageTitle: "❌Video Not Found!❌"});   
     } else{
         return res.render("watch", {pageTitle: video.title, video });
     }
@@ -32,7 +32,7 @@ export const postEdit = async (req, res) => {
     const video = await VideoModel.exists({ _id : id });
     console.log(id);
     if(!video){
-        return res.render("404", {pageTitle: "❌Video Not Found!❌"});
+        return res.status(404).render("404", {pageTitle: "❌Video Not Found!❌"});
     } else{
     await VideoModel.findByIdAndUpdate(id, {
         title:title,
@@ -44,7 +44,7 @@ export const postEdit = async (req, res) => {
 }
 // 비디오 업로드하기 (GET)
 export const getUpload = (req, res) => {
-    return res.render("upload", {pageTitle: "Upload Video"});
+    return res.status(400).render("upload", {pageTitle: "Upload Video"});
 }
 // 비디오 업로드하기 (POST)
 export const postUpload = async (req, res) => {
