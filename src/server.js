@@ -1,8 +1,10 @@
 import express from "express";
 import morgan from "morgan";
+import session from "express-session";
 import rootRouter from "./routers/rootRouter";
 import userRouter from "./routers/userRouter";
 import videoRouter from "./routers/videoRouter";
+import { localsMiddleware } from "./middlewares";
 
 // 서버(app) 만들기: express 함수 호출로 가능
 const app = express();
@@ -15,6 +17,16 @@ const logger = morgan("dev");
 app.use(logger);
 // express가 form의 value 값을 읽을 수 있도록 설정
 app.use(express.urlencoded({extended: true}));
+
+// 세션 미들웨어 생성
+app.use(session({
+    secret: "Hello",
+    resave: true,
+    saveUninitialized: true,
+}));
+// locals 미들웨어 생성
+app.use(localsMiddleware);
+
 // 라우터 사용
 app.use("/", rootRouter);
 app.use("/users", userRouter);
