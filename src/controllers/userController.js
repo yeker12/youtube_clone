@@ -42,11 +42,11 @@ export const postLogin = async (req, res) => {
     // 비밀번호 맞는지 확인
     const user = await UserModel.findOne({username});
     if(!user){
-        res.status(400).render("login", {pageTitle, errorMessage: "Wrong username"});
+        return res.status(400).render("login", {pageTitle, errorMessage: "Wrong username"});
     }
     const loginOK = await bcycrt.compare(password, user.password);
     if(!loginOK){
-        res.status(400).render("login", {pageTitle, errorMessage: "Wrong Password"});
+        return res.status(400).render("login", {pageTitle, errorMessage: "Wrong Password"});
     }
     // 로그인 시 세션 추가
     req.session.loggedIn = true;
